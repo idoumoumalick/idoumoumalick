@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraison Express - Service de Livraison Rapide</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">🚚 Livraison Express</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#tarifs">Tarifs</a></li>
+                <li><a href="#suivi">Suivi</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="btn-primary">Commander</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="container">
+            <h1>Service de Livraison Rapide et Fiable</h1>
+            <p>Livrez vos colis en toute confiance avec notre service express. Livraison en 24h partout en France.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary btn-large">Demander un devis</button>
+                <button class="btn-secondary btn-large">Suivre un colis</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Nos Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon">⚡</div>
+                    <h3>Livraison Express</h3>
+                    <p>Livraison en moins de 24h dans toute la France métropolitaine.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">📦</div>
+                    <h3>Colis Standards</h3>
+                    <p>Livraison économique en 48-72h pour vos envois non urgents.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">🌍</div>
+                    <h3>Livraison Internationale</h3>
+                    <p>Expédiez vos colis partout dans le monde en toute sécurité.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">❄️</div>
+                    <h3>Livraison Frigorifique</h3>
+                    <p>Transport réfrigéré pour produits alimentaires et pharmaceutiques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tarifs Section -->
+    <section id="tarifs" class="pricing">
+        <div class="container">
+            <h2>Nos Tarifs</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Express 24h</h3>
+                    <div class="price">9.99€</div>
+                    <p>À partir de</p>
+                    <ul>
+                        <li>✓ Livraison en 24h</li>
+                        <li>✓ Suivi en temps réel</li>
+                        <li>✓ Assurance incluse</li>
+                        <li>✓ Signature requise</li>
+                    </ul>
+                    <button class="btn-primary">Choisir</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="badge">Populaire</div>
+                    <h3>Standard 48h</h3>
+                    <div class="price">5.99€</div>
+                    <p>À partir de</p>
+                    <ul>
+                        <li>✓ Livraison en 48-72h</li>
+                        <li>✓ Suivi en ligne</li>
+                        <li>✓ Assurance de base</li>
+                        <li>✓ Point relais</li>
+                    </ul>
+                    <button class="btn-primary">Choisir</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>International</h3>
+                    <div class="price">19.99€</div>
+                    <p>À partir de</p>
+                    <ul>
+                        <li>✓ Livraison 5-10 jours</li>
+                        <li>✓ Suivi international</li>
+                        <li>✓ Douane incluse</li>
+                        <li>✓ Assurance complète</li>
+                    </ul>
+                    <button class="btn-primary">Choisir</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suivi Section -->
+    <section id="suivi" class="tracking">
+        <div class="container">
+            <h2>Suivez Votre Colis</h2>
+            <p>Entrez votre numéro de suivi pour connaître la position de votre colis en temps réel.</p>
+            <div class="tracking-form">
+                <input type="text" placeholder="Numéro de suivi (ex: LIV123456789)" id="tracking-number">
+                <button class="btn-primary" onclick="trackPackage()">Suivre</button>
+            </div>
+            <div id="tracking-result" class="tracking-result"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contactez-Nous</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Informations</h3>
+                    <p>📍 123 Rue de la Livraison, 75001 Paris</p>
+                    <p>📞 01 23 45 67 89</p>
+                    <p>✉️ contact@livraison-express.fr</p>
+                    <p>🕐 Lun-Ven: 8h-20h, Sam: 9h-18h</p>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <input type="text" placeholder="Votre nom" required>
+                    <input type="email" placeholder="Votre email" required>
+                    <input type="tel" placeholder="Votre téléphone">
+                    <textarea placeholder="Votre message" rows="5" required></textarea>
+                    <button type="submit" class="btn-primary">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Livraison Express</h4>
+                    <p>Votre partenaire de confiance pour toutes vos livraisons.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Liens Utiles</h4>
+                    <ul>
+                        <li><a href="#">Conditions générales</a></li>
+                        <li><a href="#">Politique de confidentialité</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#">Facebook</a>
+                        <a href="#">Twitter</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Livraison Express. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
