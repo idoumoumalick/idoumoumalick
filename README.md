@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://chatgpt.com/s/m_69ebf7cdbf548191ab66cab3364a0069" width="100%">
+  <img src="https://github.com/idomou12/assets/blob/main/assets.png" width="100%">
 </p>
 
 
