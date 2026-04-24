@@ -105,7 +105,7 @@ Passionate about cybersecurity and ethical hacking, with a growing interest in b
 <h2>📫 Contact</h2>
 <p>
 GitHub: https://github.com/idomou12 <br>
-YouTube: Add your channel here
+YouTube: https://www.youtube.com/@idoumouMalick
 </p>
 
 <hr>
