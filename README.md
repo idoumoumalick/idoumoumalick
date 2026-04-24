@@ -1,63 +1,112 @@
-[![](https://raw.githubusercontent.com/adamalston/adamalston/master/profile.gif)](https://github.com/YOUR_USERNAME)
+<p align="center">
+  <img src="https://chatgpt.com/s/m_69ebf7cdbf548191ab66cab3364a0069" width="100%">
+</p>
 
-## 👋 Hi, I'm Idoumou Malick
 
-🎓 MI Student (Mathematics & Computer Science)
-🔐 Cybersecurity Enthusiast | Ethical Hacking
-🚀 YouTube Creator (AI tools for students)
+<h1 align="center">Idoumou Malick</h1>
 
----
+<p align="center">
+🎓 MI Student | 💻 Software & Web Developer <br>
+🔐 Cybersecurity Enthusiast | 🤖 AI Tools User <br>
+📍 Mauritania
+</p>
 
-### Languages
+<p align="center">
+  <a href="https://github.com/YOUR_USERNAME">
+    <img src="https://img.shields.io/badge/GitHub-000?logo=github">
+  </a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/YouTube-000?logo=youtube">
+  </a>
+</p>
 
-![C](https://img.shields.io/badge/-C-000?\&logo=C)
-![Java](https://img.shields.io/badge/-Java-000?\&logo=Java\&logoColor=007396)
-![JavaScript](https://img.shields.io/badge/-JavaScript-000?\&logo=JavaScript)
-![HTML](https://img.shields.io/badge/-HTML-000?\&logo=HTML5)
-![CSS](https://img.shields.io/badge/-CSS-000?\&logo=CSS3)
+<hr>
 
----
+<h2>🧠 Profile</h2>
+<p>
+Motivated Mathematics & Computer Science student with a strong foundation in programming, web development, and Linux systems.  
+Passionate about cybersecurity and ethical hacking, with a growing interest in building practical tools and leveraging AI technologies to improve productivity and learning.
+</p>
 
-### Technologies
+<hr>
 
-![Linux](https://img.shields.io/badge/-Linux-000?\&logo=Linux)
-![Git](https://img.shields.io/badge/-Git-000?\&logo=Git)
-![VS Code](https://img.shields.io/badge/-VSCode-000?\&logo=VisualStudioCode)
-![Eclipse](https://img.shields.io/badge/-Eclipse-000?\&logo=Eclipse)
-![CodeBlocks](https://img.shields.io/badge/-CodeBlocks-000)
+<h2>💻 Technical Skills</h2>
 
----
+<h3>Languages</h3>
+<p>
+<img src="https://img.shields.io/badge/C-000?logo=C">
+<img src="https://img.shields.io/badge/Java-000?logo=Java&logoColor=007396">
+<img src="https://img.shields.io/badge/JavaScript-000?logo=JavaScript">
+<img src="https://img.shields.io/badge/HTML5-000?logo=HTML5">
+<img src="https://img.shields.io/badge/CSS3-000?logo=CSS3">
+</p>
 
-### AI Tools
+<h3>Development & Systems</h3>
+<p>
+<img src="https://img.shields.io/badge/Linux-000?logo=Linux">
+<img src="https://img.shields.io/badge/Git-000?logo=Git">
+<img src="https://img.shields.io/badge/VSCode-000?logo=VisualStudioCode">
+<img src="https://img.shields.io/badge/Eclipse-000?logo=Eclipse">
+<img src="https://img.shields.io/badge/CodeBlocks-000">
+</p>
 
-![ChatGPT](https://img.shields.io/badge/-ChatGPT-000)
-![Copilot](https://img.shields.io/badge/-GitHub%20Copilot-000)
-![Gemini](https://img.shields.io/badge/-Gemini-000)
-![Claude](https://img.shields.io/badge/-Claude-000)
-![Perplexity](https://img.shields.io/badge/-Perplexity-000)
-![DeepSeek](https://img.shields.io/badge/-DeepSeek-000)
+<h3>Office Tools</h3>
+<p>
+<img src="https://img.shields.io/badge/Word-000?logo=microsoftword">
+<img src="https://img.shields.io/badge/Excel-000?logo=microsoftexcel">
+<img src="https://img.shields.io/badge/PowerPoint-000?logo=microsoftpowerpoint">
+</p>
 
----
+<h3>AI & Productivity Tools</h3>
+<p>
+<img src="https://img.shields.io/badge/ChatGPT-000">
+<img src="https://img.shields.io/badge/Perplexity-000">
+<img src="https://img.shields.io/badge/Copilot-000">
+<img src="https://img.shields.io/badge/Gemini-000">
+<img src="https://img.shields.io/badge/Claude-000">
+<img src="https://img.shields.io/badge/DeepSeek-000">
+<img src="https://img.shields.io/badge/Grok-000">
+<img src="https://img.shields.io/badge/Qwen-000">
+<img src="https://img.shields.io/badge/Kimi-000">
+<img src="https://img.shields.io/badge/Z.ai-000">
+</p>
 
-### Projects
+<hr>
 
-[![](https://img.shields.io/badge/-🔧%20Student%20Tools-000)](https://github.com/YOUR_USERNAME)
-[![](https://img.shields.io/badge/-🌐%20Web%20Projects-000)](https://github.com/YOUR_USERNAME)
-[![](https://img.shields.io/badge/-🔐%20Cybersecurity%20Labs-000)](https://github.com/YOUR_USERNAME)
+<h2>🔐 Cybersecurity Focus</h2>
+<ul>
+  <li>Networking Fundamentals</li>
+  <li>Linux Systems & Command Line</li>
+  <li>Ethical Hacking Basics</li>
+  <li>Security Concepts & Practices</li>
+  <li>Currently studying CompTIA A+</li>
+</ul>
 
----
+<hr>
 
-### Cybersecurity (Learning Journey)
+<h2>🚀 Projects</h2>
+<ul>
+  <li>🔧 Student productivity tools (in progress)</li>
+  <li>🌐 Web applications (HTML, CSS, JS)</li>
+  <li>🔐 Beginner cybersecurity labs</li>
+</ul>
 
-[![](https://img.shields.io/badge/-🧩%20Networking-000)]()
-[![](https://img.shields.io/badge/-🐧%20Linux-000)]()
-[![](https://img.shields.io/badge/-🛡%20Ethical%20Hacking-000)]()
-[![](https://img.shields.io/badge/-📡%20Network%20Security-000)]()
-[![](https://img.shields.io/badge/-🔍%20Pentesting-000)]()
+<hr>
 
----
+<h2>📊 GitHub Stats</h2>
+<p align="center">
+  <img height="150" src="https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME&show_icons=true&hide_border=true">
+  <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_USERNAME&layout=compact&hide_border=true">
+</p>
 
-<a href="https://github.com/YOUR_USERNAME">
-  <img height="137px" src="https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME&hide_title=true&hide_border=true&show_icons=true&include_all_commits=true&count_private=true&line_height=21&theme=graywhite" />
-  <img height="137px" src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_USERNAME&hide_title=true&hide_border=true&layout=compact&langs_count=6&theme=graywhite" />
-</a>
+<hr>
+
+<h2>📫 Contact</h2>
+<p>
+GitHub: https://github.com/YOUR_USERNAME <br>
+YouTube: Add your channel here
+</p>
+
+<hr>
+
+<p align="center"><b>Focused. Consistent. Building my future in Cybersecurity.</b></p>
