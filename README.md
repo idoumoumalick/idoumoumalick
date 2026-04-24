@@ -39,6 +39,7 @@ Passionate about cybersecurity and ethical hacking, with a growing interest in b
 <img src="https://img.shields.io/badge/JavaScript-000?logo=JavaScript">
 <img src="https://img.shields.io/badge/HTML5-000?logo=HTML5">
 <img src="https://img.shields.io/badge/CSS3-000?logo=CSS3">
+<img src="https://img.shields.io/badge/Python-000?logo=Python">
 </p>
 
 <h3>Development & Systems</h3>
