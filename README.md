@@ -95,15 +95,15 @@ Passionate about cybersecurity and ethical hacking, with a growing interest in b
 
 <h2>📊 GitHub Stats</h2>
 <p align="center">
-  <img height="150" src="https://github-readme-stats.vercel.app/api?username=YOUR_USERNAME&show_icons=true&hide_border=true">
-  <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=YOUR_USERNAME&layout=compact&hide_border=true">
+  <img height="150" src="https://github-readme-stats.vercel.app/api?username=idomou12&show_icons=true&hide_border=true">
+  <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=idomou12&layout=compact&hide_border=true">
 </p>
 
 <hr>
 
 <h2>📫 Contact</h2>
 <p>
-GitHub: https://github.com/YOUR_USERNAME <br>
+GitHub: https://github.com/idomou12 <br>
 YouTube: Add your channel here
 </p>
 
