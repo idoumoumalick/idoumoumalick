@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/idomou12/assets/blob/main/assets.png" width="100%">
+  <img src="https://github.com/idoumoumalick/assets/blob/main/assets.png" width="100%">
 </p>
 
 
@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/YOUR_USERNAME">
+  <a href="https://github.com/idoumoumalick">
     <img src="https://img.shields.io/badge/GitHub-000?logo=github">
   </a>
   <a href="#">
@@ -96,15 +96,15 @@ Passionate about cybersecurity and ethical hacking, with a growing interest in b
 
 <h2>📊 GitHub Stats</h2>
 <p align="center">
-  <img height="150" src="https://github-readme-stats.vercel.app/api?username=idomou12&show_icons=true&hide_border=true">
-  <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=idomou12&layout=compact&hide_border=true">
+  <img height="150" src="https://github-readme-stats.vercel.app/api?username=idoumoumalick&show_icons=true&hide_border=true">
+  <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=idoumoumalick&layout=compact&hide_border=true">
 </p>
 
 <hr>
 
 <h2>📫 Contact</h2>
 <p>
-GitHub: https://github.com/idomou12 <br>
+GitHub: https://github.com/idoumoumalick <br>
 YouTube: https://www.youtube.com/@idoumouMalick
 </p>
 
