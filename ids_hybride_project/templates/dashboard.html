@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - IDS Hybride{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>🛡️ Dashboard IDS Hybride</h1>
+    
+    <div class="mode-info">
+        <p>Mode actuel: <strong>{{ mode|default('offline')|upper }}</strong></p>
+        {% if mode == 'live' %}
+        <p class="warning">⚠ Mode LIVE actif - Redirection vers /live...</p>
+        <script>window.location.href = "{{ url_for('live.dashboard') }}";</script>
+        {% endif %}
+    </div>
+
+    <!-- Statistiques -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Alertes</h3>
+            <p class="stat-value" id="total-alerts">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Attaques Détectées</h3>
+            <p class="stat-value" id="attacks-count">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Risque Critique</h3>
+            <p class="stat-value critical" id="critical-risk">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Taux de Détection</h3>
+            <p class="stat-value" id="detection-rate">0%</p>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions-section">
+        <h2>Actions</h2>
+        
+        <div class="action-cards">
+            <div class="action-card">
+                <h3>📊 Lancer l'Analyse</h3>
+                <p>Analyser le dataset de test avec les détecteurs Rule-Based et ML</p>
+                <button id="btn-analyze" class="btn btn-primary" onclick="startAnalysis()">
+                    Lancer l'analyse
+                </button>
+                <div class="progress-bar" id="analysis-progress" style="display:none;">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <p class="status-text" id="analysis-status"></p>
+            </div>
+
+            <div class="action-card">
+                <h3>🤖 Entraîner le Modèle</h3>
+                <p>Entraîner le Random Forest sur le dataset UNSW-NB15</p>
+                <button id="btn-train" class="btn btn-secondary" onclick="trainModel()">
+                    Entraîner
+                </button>
+                <p class="note">⚠ Le modèle ne doit pas être réentraîné inutilement</p>
+            </div>
+
+            <div class="action-card">
+                <h3>📡 Mode Live</h3>
+                <p>Basculer en mode capture réseau temps réel</p>
+                <a href="#" class="btn btn-warning" onclick="alert('Modifiez MODE=\"live\" dans app.py pour activer le mode live')">
+                    Activer Mode Live
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dernières alertes -->
+    <div class="alerts-section">
+        <h2>Dernières Alertes</h2>
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Source IP</th>
+                        <th>Destination IP</th>
+                        <th>Attaque</th>
+                        <th>Méthode</th>
+                        <th>Risque</th>
+                    </tr>
+                </thead>
+                <tbody id="alerts-table-body">
+                    <tr><td colspan="6">Aucune alerte</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
