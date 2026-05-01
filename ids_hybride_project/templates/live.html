@@ -1,0 +1,289 @@
+{% extends "base.html" %}
+
+{% block title %}Live Detection - IDS Hybride{% endblock %}
+
+{% block content %}
+<div class="live-dashboard">
+    <h1>📡 Détection Temps Réel</h1>
+
+    <!-- Sélection interface -->
+    <div class="interface-section">
+        <h2>Sélection de l'Interface Réseau</h2>
+        <div class="interface-selector">
+            <select id="interface-select">
+                <option value="">-- Choisir une interface --</option>
+            </select>
+            <button class="btn btn-primary" onclick="loadInterfaces()">Actualiser</button>
+        </div>
+    </div>
+
+    <!-- Contrôles -->
+    <div class="controls-section">
+        <div class="control-card">
+            <h3>Contrôle de Capture</h3>
+            <div class="button-group">
+                <button id="btn-start" class="btn btn-success" onclick="startCapture()" disabled>
+                    ▶ Démarrer
+                </button>
+                <button id="btn-stop" class="btn btn-danger" onclick="stopCapture()" disabled>
+                    ⏹ Arrêter
+                </button>
+            </div>
+            <div class="status-indicator">
+                <span id="capture-status" class="status-dot status-inactive"></span>
+                <span id="status-text">Inactif</span>
+            </div>
+        </div>
+
+        <!-- Statistiques temps réel -->
+        <div class="stats-live">
+            <div class="stat-item">
+                <label>Paquets capturés</label>
+                <p id="packets-count">0</p>
+            </div>
+            <div class="stat-item">
+                <label>Flux actifs</label>
+                <p id="flows-count">0</p>
+            </div>
+            <div class="stat-item">
+                <label>Alertes détectées</label>
+                <p id="alerts-count" class="highlight">0</p>
+            </div>
+            <div class="stat-item">
+                <label>Durée</label>
+                <p id="duration">00:00</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alertes en temps réel -->
+    <div class="live-alerts-section">
+        <h2>Alertes en Temps Réel</h2>
+        <div class="alerts-stream" id="alerts-stream">
+            <p class="placeholder">En attente d'alertes...</p>
+        </div>
+    </div>
+
+    <!-- Journal des événements -->
+    <div class="log-section">
+        <h2>Journal d'Activité</h2>
+        <div class="log-container" id="log-container">
+            <!-- Logs générés dynamiquement -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let eventSource = null;
+let startTime = null;
+let durationInterval = null;
+
+// Charger les interfaces au démarrage
+document.addEventListener('DOMContentLoaded', loadInterfaces);
+
+async function loadInterfaces() {
+    try {
+        const response = await fetch('/live/interfaces');
+        const data = await response.json();
+        
+        const select = document.getElementById('interface-select');
+        select.innerHTML = '<option value="">-- Choisir une interface --</option>';
+        
+        if (data.interfaces) {
+            data.interfaces.forEach(iface => {
+                const option = document.createElement('option');
+                option.value = iface;
+                option.textContent = iface;
+                select.appendChild(option);
+            });
+        }
+        
+        document.getElementById('btn-start').disabled = false;
+        addLog('Interfaces chargées: ' + (data.count || 0));
+    } catch (error) {
+        console.error('Erreur:', error);
+        addLog('Erreur de chargement des interfaces');
+    }
+}
+
+async function startCapture() {
+    const interface = document.getElementById('interface-select').value;
+    
+    if (!interface) {
+        alert('Veuillez sélectionner une interface');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/live/start', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({interface: interface})
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            updateCaptureState(true, interface);
+            addLog('Capture démarrée sur ' + interface);
+            
+            // Démarrer SSE
+            startSSE();
+            
+            // Démarrer le compteur de durée
+            startTime = new Date();
+            durationInterval = setInterval(updateDuration, 1000);
+        } else {
+            alert('Erreur: ' + data.error);
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        addLog('Erreur de démarrage: ' + error.message);
+    }
+}
+
+async function stopCapture() {
+    try {
+        const response = await fetch('/live/stop', {
+            method: 'POST'
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            updateCaptureState(false);
+            addLog('Capture arrêtée');
+            
+            // Arrêter SSE
+            stopSSE();
+            
+            // Arrêter le compteur
+            if (durationInterval) {
+                clearInterval(durationInterval);
+            }
+        } else {
+            alert('Erreur: ' + data.error);
+        }
+    } catch (error) {
+        console.error('Erreur:', error);
+        addLog('Erreur d\'arrêt: ' + error.message);
+    }
+}
+
+function updateCaptureState(active, interface = null) {
+    const statusDot = document.getElementById('capture-status');
+    const statusText = document.getElementById('status-text');
+    const btnStart = document.getElementById('btn-start');
+    const btnStop = document.getElementById('btn-stop');
+    const ifaceSelect = document.getElementById('interface-select');
+    
+    if (active) {
+        statusDot.className = 'status-dot status-active';
+        statusText.textContent = 'Actif sur ' + interface;
+        btnStart.disabled = true;
+        btnStop.disabled = false;
+        ifaceSelect.disabled = true;
+    } else {
+        statusDot.className = 'status-dot status-inactive';
+        statusText.textContent = 'Inactif';
+        btnStart.disabled = false;
+        btnStop.disabled = true;
+        ifaceSelect.disabled = false;
+    }
+}
+
+function startSSE() {
+    if (eventSource) {
+        eventSource.close();
+    }
+    
+    eventSource = new EventSource('/live/stream');
+    
+    eventSource.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        
+        if (data.type === 'heartbeat') {
+            // Mettre à jour les statistiques
+            document.getElementById('packets-count').textContent = data.packets || 0;
+            document.getElementById('flows-count').textContent = data.active_flows || 0;
+            document.getElementById('alerts-count').textContent = data.alerts_count || 0;
+        } else {
+            // Nouvelle alerte
+            addAlert(data);
+        }
+    };
+    
+    eventSource.onerror = function() {
+        console.log('SSE disconnected');
+    };
+}
+
+function stopSSE() {
+    if (eventSource) {
+        eventSource.close();
+        eventSource = null;
+    }
+}
+
+function addAlert(alert) {
+    const stream = document.getElementById('alerts-stream');
+    const placeholder = stream.querySelector('.placeholder');
+    if (placeholder) placeholder.remove();
+    
+    const alertCard = document.createElement('div');
+    alertCard.className = `alert-card risk-${alert.risk_level}`;
+    alertCard.innerHTML = `
+        <div class="alert-header">
+            <span class="alert-type">${alert.attack_type}</span>
+            <span class="alert-risk badge risk-${alert.risk_level}">${alert.risk_level}</span>
+        </div>
+        <div class="alert-body">
+            <p><strong>Source:</strong> ${alert.src_ip}:${alert.src_port}</p>
+            <p><strong>Destination:</strong> ${alert.dst_ip}:${alert.dst_port}</p>
+            <p><strong>Confiance:</strong> ${(alert.confidence * 100).toFixed(1)}%</p>
+            <p class="alert-time">${new Date(alert.timestamp).toLocaleTimeString()}</p>
+        </div>
+    `;
+    
+    stream.insertBefore(alertCard, stream.firstChild);
+    
+    // Limiter le nombre d'alertes affichées
+    while (stream.children.length > 20) {
+        stream.removeChild(stream.lastChild);
+    }
+    
+    addLog(`Alerte: ${alert.attack_type} (${alert.risk_level})`);
+}
+
+function addLog(message) {
+    const container = document.getElementById('log-container');
+    const logEntry = document.createElement('div');
+    logEntry.className = 'log-entry';
+    logEntry.innerHTML = `
+        <span class="log-time">${new Date().toLocaleTimeString()}</span>
+        <span class="log-message">${message}</span>
+    `;
+    
+    container.insertBefore(logEntry, container.firstChild);
+    
+    // Limiter le nombre de logs
+    while (container.children.length > 50) {
+        container.removeChild(container.lastChild);
+    }
+}
+
+function updateDuration() {
+    if (!startTime) return;
+    
+    const now = new Date();
+    const diff = Math.floor((now - startTime) / 1000);
+    
+    const minutes = Math.floor(diff / 60).toString().padStart(2, '0');
+    const seconds = (diff % 60).toString().padStart(2, '0');
+    
+    document.getElementById('duration').textContent = `${minutes}:${seconds}`;
+}
+</script>
+{% endblock %}

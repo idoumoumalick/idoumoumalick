@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+
+{% block title %}Alertes - IDS Hybride{% endblock %}
+
+{% block content %}
+<div class="alerts-page">
+    <h1>🚨 Alertes de Détection</h1>
+
+    <!-- Filtres -->
+    <div class="filters-section">
+        <div class="filter-group">
+            <label for="filter-risk">Niveau de Risque:</label>
+            <select id="filter-risk" onchange="applyFilters()">
+                <option value="">Tous</option>
+                <option value="critical">Critique</option>
+                <option value="high">Élevé</option>
+                <option value="medium">Moyen</option>
+                <option value="low">Faible</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="filter-method">Méthode:</label>
+            <select id="filter-method" onchange="applyFilters()">
+                <option value="">Toutes</option>
+                <option value="rule_based">Rule-Based</option>
+                <option value="ml">Machine Learning</option>
+                <option value="hybrid">Hybride</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="filter-attack">Type d'Attaque:</label>
+            <select id="filter-attack" onchange="applyFilters()">
+                <option value="">Tous</option>
+                <option value="Port Scan">Port Scan</option>
+                <option value="Brute Force">Brute Force</option>
+                <option value="Flood/DoS">Flood/DoS</option>
+                <option value="Fuzzers">Fuzzers</option>
+                <option value="Analysis">Analysis</option>
+                <option value="Backdoors">Backdoors</option>
+                <option value="Exploits">Exploits</option>
+                <option value="Generic">Generic</option>
+                <option value="Reconnaissance">Reconnaissance</option>
+                <option value="Shellcode">Shellcode</option>
+                <option value="Worms">Worms</option>
+            </select>
+        </div>
+
+        <button class="btn btn-secondary" onclick="loadAlerts()">Actualiser</button>
+    </div>
+
+    <!-- Tableau des alertes -->
+    <div class="table-container">
+        <table class="data-table" id="alerts-table">
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Source IP</th>
+                    <th>Destination IP</th>
+                    <th>Port</th>
+                    <th>Attaque</th>
+                    <th>Méthode</th>
+                    <th>Confiance</th>
+                    <th>Risque</th>
+                </tr>
+            </thead>
+            <tbody id="alerts-table-body">
+                <tr><td colspan="8">Chargement...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination">
+        <!-- Généré dynamiquement -->
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+let allAlerts = [];
+
+async function loadAlerts() {
+    try {
+        const response = await fetch('/api/alerts?limit=500');
+        const data = await response.json();
+        allAlerts = data.alerts || [];
+        displayAlerts(allAlerts);
+    } catch (error) {
+        console.error('Erreur:', error);
+        document.getElementById('alerts-table-body').innerHTML = 
+            '<tr><td colspan="8">Erreur de chargement</td></tr>';
+    }
+}
+
+function displayAlerts(alerts) {
+    const tbody = document.getElementById('alerts-table-body');
+    
+    if (alerts.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8">Aucune alerte</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = alerts.map(alert => {
+        const riskClass = `risk-${alert.risk_level}`;
+        const methodLabel = {
+            'rule_based': 'Rule-Based',
+            'ml': 'ML',
+            'hybrid': 'Hybride'
+        }[alert.detection_method] || alert.detection_method;
+
+        return `
+            <tr class="${riskClass}">
+                <td>${new Date(alert.timestamp).toLocaleString()}</td>
+                <td>${alert.src_ip}</td>
+                <td>${alert.dst_ip}</td>
+                <td>${alert.dst_port || '-'}</td>
+                <td>${alert.attack_type}</td>
+                <td>${methodLabel}</td>
+                <td>${(alert.confidence * 100).toFixed(1)}%</td>
+                <td><span class="badge ${riskClass}">${alert.risk_level}</span></td>
+            </tr>
+        `;
+    }).join('');
+}
+
+function applyFilters() {
+    const riskFilter = document.getElementById('filter-risk').value;
+    const methodFilter = document.getElementById('filter-method').value;
+    const attackFilter = document.getElementById('filter-attack').value;
+
+    let filtered = allAlerts;
+
+    if (riskFilter) {
+        filtered = filtered.filter(a => a.risk_level === riskFilter);
+    }
+
+    if (methodFilter) {
+        filtered = filtered.filter(a => a.detection_method === methodFilter);
+    }
+
+    if (attackFilter) {
+        filtered = filtered.filter(a => a.attack_type.includes(attackFilter));
+    }
+
+    displayAlerts(filtered);
+}
+
+// Charger au démarrage
+document.addEventListener('DOMContentLoaded', loadAlerts);
+
+// Auto-refresh toutes les 30 secondes
+setInterval(loadAlerts, 30000);
+</script>
+{% endblock %}

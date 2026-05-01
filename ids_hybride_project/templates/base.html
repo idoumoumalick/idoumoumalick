@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}IDS Hybride{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('index') }}">🛡️ IDS Hybride</a>
+        </div>
+        <ul class="nav-links">
+            {% if mode == 'offline' or not mode %}
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('alerts') }}">Alertes</a></li>
+            {% else %}
+            <li><a href="{{ url_for('live.dashboard') }}">Live</a></li>
+            <li><a href="{{ url_for('alerts') }}">Alertes</a></li>
+            {% endif %}
+        </ul>
+        <div class="nav-mode">
+            <span class="mode-badge mode-{{ mode|default('offline') }}">
+                {{ mode|default('offline')|upper }}
+            </span>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 IDS Hybride - Système de Détection d'Intrusion Réseau</p>
+        <p>Projet de Fin d'Études - Spécialité MI (Méthodes Informatiques)</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
