@@ -6,7 +6,7 @@
 <h1 align="center">Idoumou Malick</h1>
 
 <p align="center">
-🎓 MI Student | 💻 Software & Web Developer <br>
+🎓 un Student | 💻 Software & Web Developer <br>
 🔐 Cybersecurity Enthusiast | 🤖 AI Tools User <br>
 📍 Mauritania
 </p>
